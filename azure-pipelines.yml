@@ -1,0 +1,36 @@
+# Azure Pipelines YAML for Playwright + Cucumber + TypeScript
+# This pipeline will:
+# - Install dependencies
+# - Install Playwright browsers (Edge)
+# - Run Cucumber tests with TypeScript support
+# - Publish the Cucumber HTML report as a pipeline artifact
+
+trigger:
+  - main
+  - master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
+  - script: npm install
+    displayName: 'Install dependencies'
+
+  - script: npx playwright install --with-deps msedge
+    displayName: 'Install Playwright Edge browser'
+
+  - script: |
+      npx cucumber-js --require-module ts-node/register --require src/steps/**/*.ts --format html:report.html
+    displayName: 'Run Cucumber tests (UI & API)'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(System.DefaultWorkingDirectory)/report.html'
+      ArtifactName: 'CucumberReport'
+      publishLocation: 'Container'
+    displayName: 'Publish Cucumber HTML Report'
