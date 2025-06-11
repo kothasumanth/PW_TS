@@ -10,6 +10,20 @@
 - Cucumber HTML Reporting
 - Feature-to-step navigation (Ctrl+Click)
 
+## Framework & Tool Mapping
+
+| Capability         | Framework/Tool Used           |
+|--------------------|------------------------------|
+| Scripting Language | TypeScript                   |
+| BDD                | Cucumber.js                  |
+| Parallel Execution | Cucumber.js                  |
+| Retry              | Cucumber.js                  |
+| API Automation     | Playwright Test / APIRequest |
+| Test Runner        | Cucumber.js                  |
+| Reporting          | Cucumber HTML Reporter       |
+| Assertion Library  | Playwright (built-in expect) |
+| Browser Automation | Playwright                   |
+
 ## Installation & Setup
 1. **Install dependencies:**
    ```powershell
